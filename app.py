@@ -11,7 +11,9 @@ openai.api_key = st.secrets["openai_key"]
 try:
     df = pd.read_csv('qa_dataset_with_embeddings.csv')
     # Convert the string representation of the embeddings to numpy arrays
-    df['Question_Embedding'] = df['Question_Embedding'].apply(lambda x: np.array(x.strip("[]").split(), dtype=float))
+    df['Question_Embedding'] = df['Question_Embedding'].apply(
+        lambda x: np.array(str(x).strip("[]").split(), dtype=float) if pd.notnull(x) else np.array([])
+    )
     question_embeddings = np.stack(df['Question_Embedding'].values)
 except FileNotFoundError:
     st.error("qa_dataset_with_embeddings.csv not found. Please upload the file.")
