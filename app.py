@@ -58,7 +58,7 @@ if st.button("Get Answer"):
     else:
         st.warning("Please enter a question.")
 
-# Add a Clear button (Optional)
+# Add a Clear button
 if st.button("Clear Question"):
     user_question = ""
-    st.experimental_rerun() # Rerun the app to clear the input field
+    st.rerun() # Rerun the app to clear the input field
